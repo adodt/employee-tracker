@@ -1,0 +1,20 @@
+{
+  "name": "employee-tracker",
+  "version": "1.0.0",
+  "description": "basic CRM to organize employees",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adodt/employee-tracker.git"
+  },
+  "author": "Alli Dodt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adodt/employee-tracker/issues"
+  },
+  "homepage": "https://github.com/adodt/employee-tracker#readme"
+}
