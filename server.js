@@ -7,7 +7,7 @@ require('dotenv').config();
 
 
 //connect to database
-const connection = myswl.CreateConnection({
+const connection = mysql.CreateConnection({
     host: 'localhost',
     user: 'root',
     password: process.env.MYSQL_PASSWORD,
