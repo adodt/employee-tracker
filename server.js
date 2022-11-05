@@ -4,3 +4,12 @@ const inquirer = require('inquirer');
 const cTable = require('console.table');
 
 require('dotenv').config();
+
+
+//connect to database
+const connection = myswl.CreateConnection({
+    host: 'localhost',
+    user: 'root',
+    password: process.env.MYSQL_PASSWORD,
+    database: 'employee_db'
+});
