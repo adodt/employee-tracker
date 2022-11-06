@@ -1,20 +1,9 @@
-//import mySQL
-const mysql = require('mysql12');
 //import inquirer
 const inquirer = require('inquirer');
 //import console.table
 const table = require('console.table');
-//use .env 
-require('dotenv').config();
-
-
-//connect to sql database
-const connection = mysql.CreateConnection({
-    host: 'localhost',
-    user: 'root',
-    password: process.env.DB_PASSWORD,
-    database: 'employee_db'
-});
+//import sequelize
+const connection = require('./config/connection')
 
 connection.connect(err => {
     if (err) throw err;
@@ -30,4 +19,26 @@ postConnection = () => {
     promptUser();
 }
 
-//
+//initial question
+const promptUser = () => {
+inquirer.prompt([
+    {
+        type: 'list',
+        name: 'choices',
+        message: 'What would you like to do?',
+        choices: ['View departments',
+            'View all roles',
+            'View all employees',
+            'Add department',
+            'Add a role',
+            'Add an employee',
+            'Update employee role',
+            'Update employee manager',
+            'Delete entire department',
+            'Delete role',
+            'Delete specific employee',
+            'Nothing',
+        ]
+    }
+])
+}
