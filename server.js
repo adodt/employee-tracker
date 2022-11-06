@@ -47,6 +47,10 @@ const promptUser = () => {
             if (choices === "View departments") {
                 viewDepartments();
             }
+
+            if (choices === "Add department") {
+                addDepartment();
+            }
         })
 
 };
@@ -59,8 +63,35 @@ viewDepartments = () => {
 
     connection.query(sql, (err, rows) => {
         if (err) throw err;
+        console.table(rows)
         promptUser();
     });
-
-
 }
+
+//add department function
+addDepartment = () => {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'addDept',
+            message: "What is the name of the department you would like to add?",
+            validate: addDept => {
+                if (addDept) {
+                    return true;
+                } else {
+                    console.log('Enter name of department you would like to add');
+                }
+            }
+        }
+    ])
+        .then(answer => {
+            const sql = `INSERT INTO department (name)
+        VALUES (?)`;
+            connection.query(sql, answer.addDept, (err, result) => {
+                if (err) throw err;
+                console.log("Added  " + answer.addDept + " to the department.");
+
+                viewDepartments();
+            });
+        });
+};
