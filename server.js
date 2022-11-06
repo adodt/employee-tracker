@@ -6,7 +6,7 @@ const cTable = require('console.table');
 require('dotenv').config();
 
 
-//connect to database
+//connect to sql database
 const connection = mysql.CreateConnection({
     host: 'localhost',
     user: 'root',
