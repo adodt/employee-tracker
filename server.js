@@ -21,24 +21,46 @@ postConnection = () => {
 
 //initial question
 const promptUser = () => {
-inquirer.prompt([
-    {
-        type: 'list',
-        name: 'choices',
-        message: 'What would you like to do?',
-        choices: ['View departments',
-            'View all roles',
-            'View all employees',
-            'Add department',
-            'Add a role',
-            'Add an employee',
-            'Update employee role',
-            'Update employee manager',
-            'Delete entire department',
-            'Delete role',
-            'Delete specific employee',
-            'Nothing',
-        ]
-    }
-])
+    inquirer.prompt([
+        {
+            type: 'list',
+            name: 'choices',
+            message: 'What would you like to do?',
+            choices: ['View departments',
+                'View all roles',
+                'View all employees',
+                'Add department',
+                'Add a role',
+                'Add an employee',
+                'Update employee role',
+                'Update employee manager',
+                'Delete entire department',
+                'Delete role',
+                'Delete specific employee',
+                'Nothing']
+        }
+    ])
+
+        .then((answers) => {
+            const { choices } = answers;
+
+            if (choices === "View departments") {
+                viewDepartments();
+            }
+        })
+
+};
+
+
+//view all departments function
+viewDepartments = () => {
+    console.log('All Departments...\n');
+    const sql = `SELECT department.id AS id, department.name AS department FROM department`;
+
+    connection.query(sql, (err, rows) => {
+        if (err) throw err;
+        promptUser();
+    });
+
+
 }
