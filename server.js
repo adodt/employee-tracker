@@ -1,8 +1,10 @@
-//import mysql, inquirer, dotenv, console.table
-const mysql = require ('mysql12');
+//import mySQL
+const mysql = require('mysql12');
+//import inquirer
 const inquirer = require('inquirer');
-const cTable = require('console.table');
-
+//import console.table
+const table = require('console.table');
+//use .env 
 require('dotenv').config();
 
 
@@ -10,6 +12,22 @@ require('dotenv').config();
 const connection = mysql.CreateConnection({
     host: 'localhost',
     user: 'root',
-    password: process.env.MYSQL_PASSWORD,
+    password: process.env.DB_PASSWORD,
     database: 'employee_db'
 });
+
+connection.connect(err => {
+    if (err) throw err;
+    console.log('connected as id ' + connection.threadId)
+    postConnection();
+});
+
+//welcome image after connection is made
+postConnection = () => {
+    console.log("****************************")
+    console.log("*     EMPLOYEE MANAGER     *")
+    console.log("****************************")
+    promptUser();
+}
+
+//
