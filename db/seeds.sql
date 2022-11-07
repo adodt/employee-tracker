@@ -21,8 +21,8 @@ VALUES
 ('Sam', 'Dodt', 1, null),
 ('Robby', 'Arnold', 2, 1),
 ('Rebecca', 'Michelle', 3, null),
-('Bobby', 'Johnson', 4, 5),
+('Bobby', 'Johnson', 4, 3),
 ('Ashley', 'Abbey', 5, 4),
 ('Kody', 'Berkley', 6, null),
 ('Emily', 'Alvarez', 7, 6),
-('Julia', 'Collura', 1, null);
+('Julia', 'Collura', 8, null);
