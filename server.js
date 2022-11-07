@@ -14,7 +14,7 @@ connection.connect(err => {
 //welcome image after connection is made
 postConnection = () => {
     console.log("****************************")
-    console.log("*     EMPLOYEE MANAGER     *")
+    console.log("*     EMPLOYEE TRACKER     *")
     console.log("****************************")
     promptUser();
 }
@@ -46,6 +46,10 @@ const promptUser = () => {
 
             if (choices === "View departments") {
                 viewDepartments();
+            }
+
+            if (choices === "View roles") {
+                showRoles();
             }
 
             if (choices === "Add department") {
@@ -95,3 +99,10 @@ addDepartment = () => {
             });
         });
 };
+
+// show all roles funcition
+showRoles = () => {
+    console.log('Show all roles...\n');
+    
+    const sql = `SELECT role`
+}
