@@ -130,7 +130,7 @@ updateRole = () => {
     connection.query(employeeSql, (err, data) => {
         if (err) throw err;
 
-        const employees = data.map(({ id, first_name, last_name }) => ({ name: first_name + " "+ last_name, value: id }));
+        const employees = data.map(({ id, first_name, last_name }) => ({ name: first_name + " " + last_name, value: id }));
 
         inquirer.prompt([
             {
@@ -193,7 +193,7 @@ viewEmployees = () => {
                 role.title,
                 department.name AS department,
                 role.salary,
-                CONCAT (manager.first_name, " ", manager.last_name AS manager
+                CONCAT (manager.first_name, " ", manager.last_name) AS manager
             FROM employee
                 LEFT JOIN role ON employee.role_id = role.id
                 LEFT JOIN department ON role.department_id = department.id
