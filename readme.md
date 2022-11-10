@@ -16,15 +16,12 @@
 
 ### Video: [Video]
 
+<img src="employee-tracker.gif" />
 
 
-### Github Repository: [horiseon-code-refactor](https://github.com/YogiBruce/horiseon-code-refactor)
 
-#
-### Screenshot
-<div align="center">
-<img src="assets/images/Screenshot.png" width ="500px"/>
-</div>
+### Github Repository: [Employee Tracker Repo](https://github.com/adodt/employee-tracker)
+
 
 <a id="license"></a>
 
