@@ -3,7 +3,8 @@ const inquirer = require('inquirer');
 //import console.table
 const table = require('console.table');
 //import sequelize
-const connection = require('./config/connection')
+const connection = require('./config/connection');
+const { query } = require('./config/connection');
 
 connection.connect(err => {
     if (err) throw err;
@@ -33,7 +34,6 @@ const promptUser = () => {
                 'Add a role',
                 'Add an employee',
                 'Update employee role',
-                'Update employee manager',
                 'Nothing']
         }
     ])
@@ -59,6 +59,10 @@ const promptUser = () => {
 
             if (choices === "View all employees") {
                 viewEmployees();
+            }
+             
+            if (choices === "Add an employee") {
+                addEmployee();
             }
         })
 
@@ -203,3 +207,56 @@ viewEmployees = () => {
     });
 
 };
+
+//Add employee to team function
+addEmployee = () => {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'firstName',
+            message: "What is the name of the employee?",
+            validate: addFirst => {
+                if (addFirst){
+                    return true;
+                } else {
+                    console.log('Enter first name before proceeding');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'lastName',
+            message: "What is the last name of the employee? you are adding?",
+            validate: addLast => {
+                if (addLast) {
+                return true;
+                } else {
+                    console.log('Please enter a last name before proceeding');
+                    return false;
+                }
+            }
+        }
+    ])
+    .then(answer => {
+        const params = [answer.firstName, answer.lastName]
+
+        const roleSql = `SELECT role.id, role.title FROM role`;
+
+        connection.query(roleSql, (err, data) => {
+            if (err) throw err;
+
+            const roles = data.map(({id, title}) => ({ name: title, value: id }));
+
+            inquirer.prompt([
+                {
+                    type: 'list',
+                    name: 'role',
+                    message: "What role would you like to assign "
+                }
+            ])
+
+            
+        })
+    })
+}
