@@ -60,7 +60,7 @@ const promptUser = () => {
             if (choices === "View all employees") {
                 viewEmployees();
             }
-             
+
             if (choices === "Add an employee") {
                 addEmployee();
             }
@@ -216,7 +216,7 @@ addEmployee = () => {
             name: 'firstName',
             message: "What is the name of the employee?",
             validate: addFirst => {
-                if (addFirst){
+                if (addFirst) {
                     return true;
                 } else {
                     console.log('Enter first name before proceeding');
@@ -230,7 +230,7 @@ addEmployee = () => {
             message: "What is the last name of the employee? you are adding?",
             validate: addLast => {
                 if (addLast) {
-                return true;
+                    return true;
                 } else {
                     console.log('Please enter a last name before proceeding');
                     return false;
@@ -238,25 +238,36 @@ addEmployee = () => {
             }
         }
     ])
-    .then(answer => {
-        const params = [answer.firstName, answer.lastName]
+        .then(answer => {
+            const params = [answer.firstName, answer.lastName]
 
-        const roleSql = `SELECT role.id, role.title FROM role`;
+            const roleSql = `SELECT role.id, role.title FROM role`;
 
-        connection.query(roleSql, (err, data) => {
-            if (err) throw err;
+            connection.query(roleSql, (err, data) => {
+                if (err) throw err;
 
-            const roles = data.map(({id, title}) => ({ name: title, value: id }));
+                const roles = data.map(({ id, title }) => ({ name: title, value: id }));
 
-            inquirer.prompt([
-                {
-                    type: 'list',
-                    name: 'role',
-                    message: "What role would you like to assign "
-                }
-            ])
+                inquirer.prompt([
+                    {
+                        type: 'list',
+                        name: 'role',
+                        message: "What role would you like to assign?",
+                        choices: roles
+                    }
+                ])
+                    .then(roleChoice => {
+                        const role = roleChoice.role;
+                        params.push(role);
 
-            
+                        connection.query(sql, params, (err, result) => {
+                            if (err) throw err;
+                            console.log("Employee has been added!")
+
+                            viewEmployees();
+                        })
+                    })
+            })
         })
-    })
+
 }
